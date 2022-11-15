@@ -25,3 +25,6 @@ http://localhost:5173/ - ホーム
 http://localhost:5173/login - ログイン
 http://localhost:5173/register - 新規登録
 http://localhost:5173/mypage - マイページ
+
+# commitコマンド使用且つ最速
+修正ファイルリスト（エディタ上のアイコンをクリック） > Relative path copy
