@@ -76,7 +76,7 @@ const handleLogout = () => {
                 <span class="meta-item">現在のレベル: {{ user.level }}</span>
               </div>
             </div>
-            <button class="btn btn-outline">プロフィール編集</button>
+            <router-link to="/settings" class="btn btn-outline">設定</router-link>
           </div>
         </section>
 
@@ -514,6 +514,8 @@ const handleLogout = () => {
   background-color: transparent;
   color: #2563eb;
   border: 2px solid #2563eb;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-outline:hover {
