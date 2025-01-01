@@ -26,7 +26,7 @@ const goToMyPage = () => {
         <h1 class="logo">特急ビジネス会計</h1>
         <nav class="nav">
           <router-link to="/" class="nav-link">ホーム</router-link>
-          <a href="#" class="nav-link">検定について</a>
+          <a href="#levels" class="nav-link">検定について</a>
           <router-link to="/levels" class="nav-link">問題集</router-link>
           <a href="#" class="nav-link">お問い合わせ</a>
           <router-link
@@ -85,7 +85,7 @@ const goToMyPage = () => {
     </section>
 
     <!-- 検定レベルセクション -->
-    <section class="levels">
+    <section id="levels" class="levels">
       <div class="container">
         <h2 class="section-title">検定レベル</h2>
         <div class="levels-grid">
