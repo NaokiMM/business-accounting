@@ -23,7 +23,7 @@ const goToMyPage = () => {
     <!-- ヘッダー -->
     <header class="header">
       <div class="header-container">
-        <h1 class="logo">特急ビジネス会計</h1>
+        <h1 class="logo" @click="router.push('/')">特急ビジネス会計</h1>
         <nav class="nav">
           <router-link to="/" class="nav-link">ホーム</router-link>
           <a href="#levels" class="nav-link">検定について</a>
@@ -195,6 +195,11 @@ const goToMyPage = () => {
   font-weight: 700;
   color: #2563eb;
   margin: 0;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: #1d4ed8;
 }
 
 .nav {
