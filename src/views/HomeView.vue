@@ -30,8 +30,8 @@ const scrollToTop = () => {
         <h1 class="logo" @click="scrollToTop">特急ビジネス会計</h1>
         <nav class="nav">
           <router-link to="/" class="nav-link">ホーム</router-link>
-          <a href="#levels" class="nav-link">検定について</a>
           <router-link to="/levels" class="nav-link">問題集</router-link>
+          <a href="#levels" class="nav-link">検定について</a>
           <a href="#" class="nav-link">お問い合わせ</a>
           <router-link
             v-if="isLoggedIn"
