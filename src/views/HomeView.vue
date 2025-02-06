@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -21,12 +21,27 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+const scrollToAbout = () => {
+  const aboutSection = document.getElementById('about');
+  if (aboutSection) {
+    aboutSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 const scrollToLevels = () => {
   const levelsSection = document.getElementById('levels');
   if (levelsSection) {
     levelsSection.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+onMounted(() => {
+  if (window.location.hash === '#about') {
+    setTimeout(() => {
+      scrollToAbout();
+    }, 100);
+  }
+});
 </script>
 
 <template>
@@ -38,7 +53,7 @@ const scrollToLevels = () => {
         <nav class="nav">
           <router-link to="/" class="nav-link">ホーム</router-link>
           <router-link to="/levels" class="nav-link">問題集</router-link>
-          <a href="#levels" class="nav-link" @click.prevent="scrollToLevels">検定について</a>
+          <a href="#about" class="nav-link" @click.prevent="scrollToAbout">検定について</a>
           <a href="#" class="nav-link">お問い合わせ</a>
           <router-link
             v-if="isLoggedIn"
@@ -90,6 +105,32 @@ const scrollToLevels = () => {
             <p class="feature-description">
               財務比率分析など、企業の経営状況を分析する手法を学習します
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 検定についてセクション -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2 class="section-title">検定について</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <h3 class="about-subtitle">ビジネス会計検定とは</h3>
+            <p class="about-description">
+              ビジネス会計検定は、企業の財務諸表を読み解き、経営判断に活かすための知識を測る検定試験です。企業の財務状況を正確に理解する能力を身につけることで、ビジネスの現場で役立つ実践的なスキルを習得できます。
+            </p>
+            <h3 class="about-subtitle">検定の目的</h3>
+            <p class="about-description">
+              この検定を通じて、貸借対照表や損益計算書などの財務諸表を正しく読み解く力を養い、企業の経営状況を分析できるようになることを目指します。経営者や管理職、営業職など、様々なビジネスシーンで活用できる会計知識を体系的に学習できます。
+            </p>
+            <h3 class="about-subtitle">こんな方におすすめ</h3>
+            <ul class="about-list">
+              <li>経営判断に必要な財務知識を身につけたい方</li>
+              <li>企業の財務状況を分析できるようになりたい方</li>
+              <li>ビジネスの現場で会計知識を活用したい方</li>
+              <li>キャリアアップのために会計スキルを習得したい方</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -382,6 +423,64 @@ const scrollToLevels = () => {
 .feature-description {
   color: #6b7280;
   line-height: 1.6;
+}
+
+/* 検定についてセクション */
+.about {
+  padding: 5rem 0;
+  background-color: white;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-text {
+  text-align: left;
+}
+
+.about-subtitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  color: #1f2937;
+}
+
+.about-subtitle:first-child {
+  margin-top: 0;
+}
+
+.about-description {
+  color: #6b7280;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.about-list li {
+  padding: 0.75rem 0;
+  color: #374151;
+  position: relative;
+  padding-left: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.about-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 
 /* 検定レベルセクション */
