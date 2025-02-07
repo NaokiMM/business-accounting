@@ -4,6 +4,17 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+const goToAbout = () => {
+  router.push({ path: '/', hash: '#about' }).then(() => {
+    setTimeout(() => {
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  });
+};
+
 // レベル別の教材データ
 const materials = ref({
   level3: [
@@ -135,7 +146,7 @@ const getLevelDescription = (level: 'level3' | 'level2' | 'level1') => {
         <nav class="nav">
           <router-link to="/" class="nav-link">ホーム</router-link>
           <router-link to="/levels" class="nav-link active">問題集</router-link>
-          <a href="#" class="nav-link">検定について</a>
+          <a href="#about" class="nav-link" @click.prevent="goToAbout">検定について</a>
           <a href="#" class="nav-link">お問い合わせ</a>
         </nav>
       </div>
