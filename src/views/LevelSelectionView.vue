@@ -147,7 +147,7 @@ const getLevelDescription = (level: 'level3' | 'level2' | 'level1') => {
           <router-link to="/" class="nav-link">ホーム</router-link>
           <router-link to="/levels" class="nav-link active">問題集</router-link>
           <a href="#about" class="nav-link" @click.prevent="goToAbout">検定について</a>
-          <a href="#" class="nav-link">お問い合わせ</a>
+          <router-link to="/contact" class="nav-link">お問い合わせ</router-link>
         </nav>
       </div>
     </header>
