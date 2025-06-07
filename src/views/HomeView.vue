@@ -54,7 +54,7 @@ onMounted(() => {
           <router-link to="/" class="nav-link">ホーム</router-link>
           <router-link to="/levels" class="nav-link">問題集</router-link>
           <a href="#about" class="nav-link" @click.prevent="scrollToAbout">検定について</a>
-          <a href="#" class="nav-link">お問い合わせ</a>
+          <router-link to="/contact" class="nav-link">お問い合わせ</router-link>
           <router-link
             v-if="isLoggedIn"
             to="/mypage"
