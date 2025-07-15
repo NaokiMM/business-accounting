@@ -5,69 +5,149 @@ import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 
-// 問題データ（財務諸表の基礎）
-const questions = ref([
-  {
-    id: 1,
-    question: '貸借対照表（B/S）において、資産の部に分類されるのはどれですか？',
-    choices: [
-      '売掛金',
-      '借入金',
-      '資本金',
-      '未払金'
-    ],
-    correctAnswer: 0,
-    explanation: '売掛金は資産に分類されます。借入金と未払金は負債、資本金は純資産に分類されます。'
-  },
-  {
-    id: 2,
-    question: '損益計算書（P/L）において、売上高から売上原価を差し引いたものを何といいますか？',
-    choices: [
-      '営業利益',
-      '経常利益',
-      '売上総利益（粗利益）',
-      '当期純利益'
-    ],
-    correctAnswer: 2,
-    explanation: '売上高から売上原価を差し引いたものを売上総利益（粗利益）といいます。'
-  },
-  {
-    id: 3,
-    question: '貸借対照表において、「流動資産」に含まれるのはどれですか？',
-    choices: [
-      '建物',
-      '土地',
-      '現金',
-      '機械装置'
-    ],
-    correctAnswer: 2,
-    explanation: '現金は流動資産に分類されます。建物、土地、機械装置は固定資産に分類されます。'
-  },
-  {
-    id: 4,
-    question: '損益計算書において、会社の本業から得られる利益を何といいますか？',
-    choices: [
-      '経常利益',
-      '営業利益',
-      '税引前当期純利益',
-      '当期純利益'
-    ],
-    correctAnswer: 1,
-    explanation: '営業利益は、本業の営業活動から得られる利益です。売上総利益から販売費及び一般管理費を差し引いたものになります。'
-  },
-  {
-    id: 5,
-    question: '貸借対照表において、資産の合計額と負債・純資産の合計額の関係はどうなっていますか？',
-    choices: [
-      '資産の合計額 = 負債の合計額',
-      '資産の合計額 = 負債の合計額 + 純資産の合計額',
-      '資産の合計額 = 純資産の合計額',
-      '資産の合計額 > 負債の合計額 + 純資産の合計額'
-    ],
-    correctAnswer: 1,
-    explanation: '貸借対照表では「資産 = 負債 + 純資産」という等式が成り立ちます。これを会計等式といいます。'
-  }
-]);
+const materialId = computed(() => Number(route.params.materialId));
+
+// 問題データセット
+const questionSets: Record<number, Array<{
+  id: number;
+  question: string;
+  choices: string[];
+  correctAnswer: number;
+  explanation: string;
+}>> = {
+  1: [
+    {
+      id: 1,
+      question: '貸借対照表（B/S）において、資産の部に分類されるのはどれですか？',
+      choices: [
+        '売掛金',
+        '借入金',
+        '資本金',
+        '未払金'
+      ],
+      correctAnswer: 0,
+      explanation: '売掛金は資産に分類されます。借入金と未払金は負債、資本金は純資産に分類されます。'
+    },
+    {
+      id: 2,
+      question: '損益計算書（P/L）において、売上高から売上原価を差し引いたものを何といいますか？',
+      choices: [
+        '営業利益',
+        '経常利益',
+        '売上総利益（粗利益）',
+        '当期純利益'
+      ],
+      correctAnswer: 2,
+      explanation: '売上高から売上原価を差し引いたものを売上総利益（粗利益）といいます。'
+    },
+    {
+      id: 3,
+      question: '貸借対照表において、「流動資産」に含まれるのはどれですか？',
+      choices: [
+        '建物',
+        '土地',
+        '現金',
+        '機械装置'
+      ],
+      correctAnswer: 2,
+      explanation: '現金は流動資産に分類されます。建物、土地、機械装置は固定資産に分類されます。'
+    },
+    {
+      id: 4,
+      question: '損益計算書において、会社の本業から得られる利益を何といいますか？',
+      choices: [
+        '経常利益',
+        '営業利益',
+        '税引前当期純利益',
+        '当期純利益'
+      ],
+      correctAnswer: 1,
+      explanation: '営業利益は、本業の営業活動から得られる利益です。売上総利益から販売費及び一般管理費を差し引いたものになります。'
+    },
+    {
+      id: 5,
+      question: '貸借対照表において、資産の合計額と負債・純資産の合計額の関係はどうなっていますか？',
+      choices: [
+        '資産の合計額 = 負債の合計額',
+        '資産の合計額 = 負債の合計額 + 純資産の合計額',
+        '資産の合計額 = 純資産の合計額',
+        '資産の合計額 > 負債の合計額 + 純資産の合計額'
+      ],
+      correctAnswer: 1,
+      explanation: '貸借対照表では「資産 = 負債 + 純資産」という等式が成り立ちます。これを会計等式といいます。'
+    }
+  ],
+  2: [
+    {
+      id: 1,
+      question: '「資産」の定義として正しいのはどれですか？',
+      choices: [
+        '会社が借りているお金',
+        '会社が所有している経済的価値のあるもの',
+        '会社が株主から集めた資金',
+        '会社が支払うべき債務'
+      ],
+      correctAnswer: 1,
+      explanation: '資産とは、会社が所有している経済的価値のあるものを指します。現金、売掛金、建物、土地などが該当します。'
+    },
+    {
+      id: 2,
+      question: '「負債」の定義として正しいのはどれですか？',
+      choices: [
+        '会社が所有している財産',
+        '会社が将来返済する義務があるもの',
+        '会社が稼いだ利益',
+        '会社の資本金'
+      ],
+      correctAnswer: 1,
+      explanation: '負債とは、会社が将来返済する義務があるものを指します。借入金、買掛金、未払金などが該当します。'
+    },
+    {
+      id: 3,
+      question: '「純資産」とは何を指しますか？',
+      choices: [
+        '資産から負債を差し引いたもの',
+        '資産と負債を合計したもの',
+        '負債から資産を差し引いたもの',
+        '売上高から売上原価を差し引いたもの'
+      ],
+      correctAnswer: 0,
+      explanation: '純資産とは、資産から負債を差し引いたもので、会社の正味の財産を表します。資本金、利益剰余金などが含まれます。'
+    },
+    {
+      id: 4,
+      question: '「売上原価」とは何を指しますか？',
+      choices: [
+        '商品を販売するためにかかった費用',
+        '売上に対応する商品の仕入原価や製造原価',
+        '従業員に支払う給与',
+        '広告宣伝費'
+      ],
+      correctAnswer: 1,
+      explanation: '売上原価とは、売上に対応する商品の仕入原価や製造原価を指します。売上高から売上原価を差し引くと売上総利益になります。'
+    },
+    {
+      id: 5,
+      question: '「販売費及び一般管理費」に含まれるのはどれですか？',
+      choices: [
+        '売上原価',
+        '人件費、広告宣伝費、事務所の賃借料など',
+        '借入金の返済',
+        '資本金の増資'
+      ],
+      correctAnswer: 1,
+      explanation: '販売費及び一般管理費には、人件費、広告宣伝費、事務所の賃借料、減価償却費など、営業活動に必要な費用が含まれます。'
+    }
+  ]
+};
+
+const materialTitles: Record<number, string> = {
+  1: '財務諸表の基礎',
+  2: '会計用語集'
+};
+
+const questions = computed(() => questionSets[materialId.value] || []);
+const materialTitle = computed(() => materialTitles[materialId.value] || '問題');
 
 const currentQuestionIndex = ref(0);
 const selectedAnswer = ref<number | null>(null);
@@ -77,7 +157,7 @@ const score = ref(0);
 
 const currentQuestion = computed(() => questions.value[currentQuestionIndex.value]);
 const isLastQuestion = computed(() => currentQuestionIndex.value === questions.value.length - 1);
-const progress = computed(() => ((currentQuestionIndex.value + 1) / questions.value.length) * 100);
+const progress = computed(() => questions.value.length > 0 ? ((currentQuestionIndex.value + 1) / questions.value.length) * 100 : 0);
 
 const selectAnswer = (index: number) => {
   if (showResult.value) return;
@@ -85,7 +165,7 @@ const selectAnswer = (index: number) => {
 };
 
 const submitAnswer = () => {
-  if (selectedAnswer.value === null) return;
+  if (selectedAnswer.value === null || !currentQuestion.value) return;
   
   showResult.value = true;
   if (selectedAnswer.value === currentQuestion.value.correctAnswer) {
@@ -147,7 +227,7 @@ const goToAbout = () => {
       <div class="container">
         <!-- ページタイトル -->
         <div class="page-header">
-          <h2 class="page-title">財務諸表の基礎</h2>
+          <h2 class="page-title">{{ materialTitle }}</h2>
           <div class="progress-bar">
             <div class="progress-fill" :style="{ width: progress + '%' }"></div>
           </div>
@@ -155,7 +235,7 @@ const goToAbout = () => {
         </div>
 
         <!-- 問題カード -->
-        <div class="question-card">
+        <div v-if="currentQuestion" class="question-card">
           <div class="question-content">
             <h3 class="question-text">{{ currentQuestion.question }}</h3>
             

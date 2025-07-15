@@ -113,8 +113,8 @@ const selectLevel = (level: 'level3' | 'level2' | 'level1') => {
 };
 
 const startMaterial = (materialId: number) => {
-  // 財務諸表の基礎（materialId: 1）の場合は問題ページに遷移
-  if (materialId === 1) {
+  // 財務諸表の基礎（materialId: 1）と会計用語集（materialId: 2）の場合は問題ページに遷移
+  if (materialId === 1 || materialId === 2) {
     router.push(`/question/${materialId}`);
   } else {
     // その他の教材は今後実装
