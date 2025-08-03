@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-const emit = defineEmits<{
-  (e: 'goToHome'): void;
-  (e: 'logout'): void;
-}>();
+const router = useRouter();
 
 // ユーザー情報（実際の実装ではAPIから取得）
 const user = ref({
@@ -43,7 +41,7 @@ const recentHistory = ref([
 
 const handleLogout = () => {
   if (confirm('ログアウトしますか？')) {
-    emit('logout');
+    router.push('/');
   }
 };
 </script>
@@ -53,9 +51,9 @@ const handleLogout = () => {
     <!-- ヘッダー -->
     <header class="mypage-header">
       <div class="header-content">
-        <h1 class="logo" @click="emit('goToHome')">特急ビジネス会計</h1>
+        <h1 class="logo" @click="router.push('/')">特急ビジネス会計</h1>
         <nav class="nav">
-          <button class="nav-link" @click="emit('goToHome')">ホーム</button>
+          <router-link to="/" class="nav-link">ホーム</router-link>
           <button class="nav-link active">マイページ</button>
           <button class="nav-link logout-btn" @click="handleLogout">ログアウト</button>
         </nav>
