@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-const emit = defineEmits<{
-  (e: 'goToLogin'): void;
-  (e: 'goToHome'): void;
-}>();
+const router = useRouter();
 
 const name = ref('');
 const email = ref('');
@@ -63,7 +61,7 @@ const handleRegister = async () => {
     await new Promise(resolve => setTimeout(resolve, 1500));
     console.log('登録成功:', { name: name.value, email: email.value });
     // 登録成功後の処理（ログイン画面への遷移など）
-    emit('goToLogin');
+    router.push('/login');
   } catch (error) {
     errorMessage.value = '登録に失敗しました。もう一度お試しください。';
   } finally {
@@ -185,13 +183,13 @@ const handleRegister = async () => {
       <div class="register-footer">
         <p class="login-link-text">
           すでにアカウントをお持ちの方は
-          <a href="#" @click.prevent="emit('goToLogin')" class="login-link">
+          <router-link to="/login" class="login-link">
             ログイン
-          </a>
+          </router-link>
         </p>
-        <a href="#" @click.prevent="emit('goToHome')" class="back-link">
+        <router-link to="/" class="back-link">
           ← トップページに戻る
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -419,4 +417,6 @@ const handleRegister = async () => {
   }
 }
 </style>
+
+
 
