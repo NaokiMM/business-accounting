@@ -113,9 +113,13 @@ const selectLevel = (level: 'level3' | 'level2' | 'level1') => {
 };
 
 const startMaterial = (materialId: number) => {
-  // TODO: 実際の教材開始処理を実装
-  console.log('教材を開始:', materialId);
-  // ここで教材ページに遷移するなどの処理を実装
+  // 財務諸表の基礎（materialId: 1）の場合は問題ページに遷移
+  if (materialId === 1) {
+    router.push(`/question/${materialId}`);
+  } else {
+    // その他の教材は今後実装
+    console.log('教材を開始:', materialId);
+  }
 };
 
 const getLevelLabel = (level: 'level3' | 'level2' | 'level1') => {
