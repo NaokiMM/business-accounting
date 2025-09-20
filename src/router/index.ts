@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import LevelSelectionView from '../views/LevelSelectionView.vue';
 import ContactView from '../views/ContactView.vue';
+import QuestionView from '../views/QuestionView.vue';
 import LoginView from '../components/LoginView.vue';
 import RegisterView from '../components/RegisterView.vue';
 import MyPageView from '../components/MyPageView.vue';
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView,
+    },
+    {
+      path: '/question/:materialId',
+      name: 'question',
+      component: QuestionView,
     },
   ],
 });
