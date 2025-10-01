@@ -20,3 +20,8 @@ npm run dev
 cd business-accounting-vue3-ts
 npm i vue-router@4
 
+# ブラウザで以下のURLに直接アクセスできます：
+http://localhost:5173/ - ホーム
+http://localhost:5173/login - ログイン
+http://localhost:5173/register - 新規登録
+http://localhost:5173/mypage - マイページ
