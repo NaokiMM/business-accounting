@@ -1,7 +1,10 @@
 # GitHub URL
 https://github.com/NaokiMM/business-accounting
 
-
+# 簡易的なコミット・プッシュ
+git add .
+git commit -m "message内容"
+git push origin main
 
 # ローカルURL
 http://localhost:5173/
@@ -16,6 +19,4 @@ npm run dev
 # router install
 cd business-accounting-vue3-ts
 npm i vue-router@4
-
-
 

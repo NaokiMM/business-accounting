@@ -4,6 +4,7 @@ import { ref } from 'vue';
 const emit = defineEmits<{
   (e: 'goToRegister'): void;
   (e: 'goToHome'): void;
+  (e: 'loginSuccess'): void;
 }>();
 
 const email = ref('');
@@ -26,7 +27,8 @@ const handleLogin = async () => {
     // シミュレーション
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('ログイン成功:', { email: email.value });
-    // ログイン成功後の処理（ダッシュボードへの遷移など）
+    // ログイン成功後の処理（マイページへの遷移）
+    emit('loginSuccess');
   } catch (error) {
     errorMessage.value = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
   } finally {

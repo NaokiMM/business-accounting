@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import LoginView from './components/LoginView.vue';
 import RegisterView from './components/RegisterView.vue';
+import MyPageView from './components/MyPageView.vue';
 
-type View = 'home' | 'login' | 'register';
+type View = 'home' | 'login' | 'register' | 'mypage';
 
 const currentView = ref<View>('home');
+const isLoggedIn = ref(false);
 
 const goToLogin = () => {
   currentView.value = 'login';
@@ -18,21 +20,64 @@ const goToRegister = () => {
 const goToHome = () => {
   currentView.value = 'home';
 };
+
+const goToMyPage = () => {
+  currentView.value = 'mypage';
+};
+
+const handleLoginSuccess = () => {
+  isLoggedIn.value = true;
+  currentView.value = 'mypage';
+};
+
+const handleLogout = () => {
+  isLoggedIn.value = false;
+  currentView.value = 'home';
+};
 </script>
 
 <template>
-  <LoginView v-if="currentView === 'login'" @go-to-register="goToRegister" @go-to-home="goToHome" />
-  <RegisterView v-else-if="currentView === 'register'" @go-to-login="goToLogin" @go-to-home="goToHome" />
+  <LoginView
+    v-if="currentView === 'login'"
+    @go-to-register="goToRegister"
+    @go-to-home="goToHome"
+    @login-success="handleLoginSuccess"
+  />
+  <RegisterView
+    v-else-if="currentView === 'register'"
+    @go-to-login="goToLogin"
+    @go-to-home="goToHome"
+  />
+  <MyPageView
+    v-else-if="currentView === 'mypage'"
+    @go-to-home="goToHome"
+    @logout="handleLogout"
+  />
   <div v-else class="app">
     <!-- ヘッダー -->
     <header class="header">
       <div class="header-container">
         <h1 class="logo">ビジネス会計検定</h1>
         <nav class="nav">
-          <a href="#" class="nav-link">ホーム</a>
+          <a href="#" class="nav-link" @click.prevent="goToHome">ホーム</a>
           <a href="#" class="nav-link">検定について</a>
           <a href="#" class="nav-link">問題集</a>
           <a href="#" class="nav-link">お問い合わせ</a>
+          <a
+            v-if="isLoggedIn"
+            href="#"
+            class="nav-link"
+            @click.prevent="goToMyPage"
+          >
+            マイページ
+          </a>
+          <button
+            v-if="isLoggedIn"
+            class="nav-link logout-btn"
+            @click="handleLogout"
+          >
+            ログアウト
+          </button>
         </nav>
       </div>
     </header>
@@ -188,10 +233,24 @@ const goToHome = () => {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0;
 }
 
 .nav-link:hover {
   color: #2563eb;
+}
+
+.logout-btn {
+  color: #dc2626;
+}
+
+.logout-btn:hover {
+  color: #b91c1c;
 }
 
 /* ヒーローセクション */
