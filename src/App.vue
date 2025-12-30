@@ -57,7 +57,7 @@ const handleLogout = () => {
     <!-- ヘッダー -->
     <header class="header">
       <div class="header-container">
-        <h1 class="logo">ビジネス会計検定</h1>
+        <h1 class="logo">特急ビジネス会計</h1>
         <nav class="nav">
           <a href="#" class="nav-link" @click.prevent="goToHome">ホーム</a>
           <a href="#" class="nav-link">検定について</a>
@@ -185,7 +185,7 @@ const handleLogout = () => {
     <!-- フッター -->
     <footer class="footer">
       <div class="container">
-        <p class="footer-text">&copy; 2024 ビジネス会計検定. All rights reserved.</p>
+        <p class="footer-text">&copy; 2024 特急ビジネス会計. All rights reserved.</p>
       </div>
     </footer>
   </div>

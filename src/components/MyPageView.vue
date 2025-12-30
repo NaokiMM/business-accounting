@@ -53,7 +53,7 @@ const handleLogout = () => {
     <!-- ヘッダー -->
     <header class="mypage-header">
       <div class="header-content">
-        <h1 class="logo" @click="emit('goToHome')">ビジネス会計検定</h1>
+        <h1 class="logo" @click="emit('goToHome')">特急ビジネス会計</h1>
         <nav class="nav">
           <button class="nav-link" @click="emit('goToHome')">ホーム</button>
           <button class="nav-link active">マイページ</button>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>特急ビジネス会計</title>
+    <script>
+      // GitHub Pages用のSPAリダイレクト
+      // 404エラー時にindex.htmlにリダイレクト
+      var path = window.location.pathname;
+      var segments = path.split('/').filter(function(segment) {
+        return segment !== '';
+      });
+      
+      // /business-accounting/ の後のパスを取得
+      var basePath = '/business-accounting/';
+      var redirectPath = basePath + 'index.html';
+      
+      // クエリパラメータとハッシュを保持
+      var search = window.location.search;
+      var hash = window.location.hash;
+      
+      window.location.replace(redirectPath + search + hash);
+    </script>
+  </head>
+  <body>
+    <p>リダイレクト中...</p>
+  </body>
+</html>
+
