@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const emit = defineEmits<{
-  (e: 'goToRegister'): void;
-  (e: 'goToHome'): void;
-  (e: 'loginSuccess'): void;
-}>();
+const router = useRouter();
 
 const email = ref('');
 const password = ref('');
@@ -28,7 +25,7 @@ const handleLogin = async () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('ログイン成功:', { email: email.value });
     // ログイン成功後の処理（マイページへの遷移）
-    emit('loginSuccess');
+    router.push('/mypage');
   } catch (error) {
     errorMessage.value = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
   } finally {
@@ -105,13 +102,13 @@ const handleLogin = async () => {
       <div class="login-footer">
         <p class="register-link-text">
           アカウントをお持ちでない方は
-          <a href="#" @click.prevent="emit('goToRegister')" class="register-link">
+          <router-link to="/register" class="register-link">
             新規登録
-          </a>
+          </router-link>
         </p>
-        <a href="#" @click.prevent="emit('goToHome')" class="back-link">
+        <router-link to="/" class="back-link">
           ← トップページに戻る
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
